@@ -2,76 +2,9 @@ return {
 	{ "nvim-tree/nvim-web-devicons", config = true },
 	{
 		"nvim-treesitter/nvim-treesitter",
-		build = function()
-			require("nvim-treesitter.install").update({ with_sync = true })
-		end,
+		build = ":TSUpdate",
 		config = function()
-			require("nvim-treesitter.configs").setup({
-				auto_install = true,
-				sync_install = false,
-				ignore_install = {},
-				ensure_installed = {
-					"vim",
-					"lua",
-					"bash",
-					"ruby",
-					"python",
-					"php",
-					"c",
-					"rust",
-					"go",
-					"gomod",
-					"gosum",
-					"gitignore",
-					"dockerfile",
-					"cpp",
-					"dart",
-					"yaml",
-					"json",
-					"jsonc",
-					"http",
-					"json5",
-					"terraform",
-					"java",
-					"scala",
-					"kotlin",
-					"typescript",
-					"javascript",
-					"html",
-					"toml",
-					"markdown",
-					"markdown_inline",
-					"css",
-					"scss",
-					"sql",
-					"proto",
-					"make",
-					"cmake",
-					"latex",
-					"kdl",
-				},
-				autopairs = {
-					enable = true,
-				},
-				indent = {
-					enable = true,
-					disable = { "yaml" },
-				},
-				highlight = {
-					enable = true,
-					additional_vim_regex_highlighting = false,
-				},
-			})
-
-			local parser_config = require("nvim-treesitter.parsers").get_parser_configs()
-			parser_config.gotmpl = {
-				install_info = {
-					url = "https://github.com/ngalaiko/tree-sitter-go-template",
-					files = { "src/parser.c" },
-				},
-				filetype = "gotmpl",
-				used_by = { "gohtmltmpl", "gotexttmpl", "gotmpl", "yaml" },
-			}
+			require("nvim-treesitter").setup({})
 		end,
 	},
 
