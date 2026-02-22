@@ -1,11 +1,25 @@
 return {
 	{ "nvim-tree/nvim-web-devicons", config = true },
 	{
-		"nvim-treesitter/nvim-treesitter",
-		build = ":TSUpdate",
-		config = function()
-			require("nvim-treesitter").setup({})
-		end,
+		{
+			"nvim-treesitter/nvim-treesitter",
+			lazy = false,
+			build = ":TSUpdate",
+			config = function()
+				vim.api.nvim_create_autocmd("FileType", {
+					pattern = { "rust", "python", "typescript", "javascript", "yaml", "toml", "json" },
+					callback = function()
+						-- syntax highlighting, provided by Neovim
+						vim.treesitter.start()
+						-- folds, provided by Neovim
+						vim.wo.foldexpr = "v:lua.vim.treesitter.foldexpr()"
+						vim.wo.foldmethod = "expr"
+						-- indentation, provided by nvim-treesitter
+						vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
+					end,
+				})
+			end,
+		},
 	},
 
 	{
