@@ -11,7 +11,7 @@ u() {
 
   # nvim --headless -c 'autocmd User PackerComplete quitall' -c 'PackerSync'
   nvim --headless "+Lazy! update" +qa
-  nvim --headless -c 'TSUpdateSync' -c 'quitall'
+  nvim --headless -c 'TSUpdate' -c 'quitall'
 
   if command -v nix-channel > /dev/null; then
     nix-channel --update
